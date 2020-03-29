@@ -41,19 +41,18 @@ class MyStreamListener(tweepy.StreamListener):
                 else:
                     text = unidecode(tweet['text'])
 
-                if len(re.findall(r"corona|virus|coronavirus|covid19|covid-19|2019-nCoV|wuhanvirus", text))!=0:
+                if len(re.findall(r"antibiotic|antibiotics", text))!=0:
                     sims = cosine_similarity(who_embs, sbert.encode([text]))
                     if sims[0][0]>threshold:
                         try:
                             parent = api.get_status(id=tweet['in_reply_to_status_id'], tweet_mode='extended')._json
+                            if (parent['user']['id'] != tweet['user']['id']) & (parent['lang']=='en'):
+                                c.execute("INSERT INTO tweets (parent_id, parent_created, parent_text, reply_id, reply_created, reply_text, similarity_with_WHO_advice) VALUES (?,?,?,?,?,?,?)", (parent['id'], parent['created_at'], parent['full_text'], tweet['id'], tweet['created_at'], text, float(sims[0][0])))
+                                conn.commit()
+                                print(parent['id'], parent['created_at'], parent['full_text'])
+                                print(tweet['id'], tweet['created_at'], text, sims[0][0], '\n')
                         except:
                             next
-                        if parent['user']['id'] != tweet['user']['id']:
-                            c.execute("INSERT INTO tweets (parent_id, parent_created, parent_text, reply_id, reply_created, reply_text, similarity_with_WHO_advice) VALUES (?,?,?,?,?,?,?)", (parent['id'], parent['created_at'], parent['full_text'], tweet['id'], tweet['created_at'], text, float(sims[0][0])))
-                            conn.commit()
-                            print(parent['id'], parent['created_at'], parent['full_text'])
-                            print(tweet['id'], tweet['created_at'], text, sims[0][0], '\n')
-                            time.sleep(10)
 
         except KeyError as e:
             print(str(e))
@@ -65,7 +64,7 @@ while True:
         auth.set_access_token(akey, asec)
         twitterStream = tweepy.Stream(auth, MyStreamListener(), language='en', tweet_mode='extended')
         #Use track to find keywords and follow to find users
-        twitterStream.filter(track=['virus', 'antibiotic', 'antibiotics'])
+        twitterStream.filter(track=['corona', 'virus', 'covid'])
     except Exception as e:
         print(str(e))
         time.sleep(4)
