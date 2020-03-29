@@ -7,9 +7,9 @@ import sqlite3
 import preprocessor as p
 p.set_options(p.OPT.MENTION, p.OPT.EMOJI)
 
-#external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://github.com/hkim07/covid19_antibiotics_monitoring/blob/master/custom.css']
 
-app = dash.Dash(__name__, external_stylesheets='./custom.css')
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.H4(children='Recent parent & reply tweets about COVID-19 and antibiotics (Auto-refresh every 15 seconds)'),

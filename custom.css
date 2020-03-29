@@ -320,6 +320,23 @@ li {
 table {
   border-collapse: collapse;
 }
+td:nth-child(1) {
+  width: 100px;
+},
+/* the second */
+td:nth-child(2) {
+  width: 300px;
+},
+/* the third */
+td:nth-child(3) {
+  width: 100px;
+},
+td:nth-child(4) {
+ width: 300px;
+},
+td:nth-child(5) {
+  width: 100px;
+},
 th:not(.CalendarDay),
 td:not(.CalendarDay) {
   padding: 12px 15px;
@@ -327,29 +344,12 @@ td:not(.CalendarDay) {
   border-bottom: 1px solid #E1E1E1; }
 th:first-child:not(.CalendarDay),
 td:first-child:not(.CalendarDay) {
-  padding-left: 0; }
+  padding-left: 10; }
 th:last-child:not(.CalendarDay),
 td:last-child:not(.CalendarDay) {
-  padding-right: 0; }
+  padding-right: 10; }
 
-td:nth-child(1) {
-  width: 100px;
-  background: #ddd;
-}
-/* the second */
-td:nth-child(2) {
-  width: 300px;
-}
-/* the third */
-td:nth-child(3) {
-  width: 100px;
-}
-td:nth-child(4) {
- width: 300px;
-}
-td:nth-child(5) {
-  width: 100px;
-}
+
 
 
 
