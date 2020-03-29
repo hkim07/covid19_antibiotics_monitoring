@@ -16,7 +16,7 @@ api = tweepy.API(auth, wait_on_rate_limit_notify=True, wait_on_rate_limit=True)
 conn = sqlite3.connect(r"covid_antibiotics.sqlite")
 c = conn.cursor()
 def create_table():
-    c.execute("CREATE TABLE IF NOT EXISTS tweets(parent_id TEXT, parent_created TEXT, parent_text TEXT, reply_id TEXT, reply_created TEXT, reply_text TEXT, similarity REAL)")
+    c.execute("CREATE TABLE IF NOT EXISTS tweets(parent_id TEXT, parent_created TEXT, parent_text TEXT, reply_id TEXT, reply_created TEXT, reply_text TEXT, similarity_with_WHO_advice REAL)")
     conn.commit()
 create_table()
 
@@ -49,10 +49,11 @@ class MyStreamListener(tweepy.StreamListener):
                         except:
                             next
                         if parent['user']['id'] != tweet['user']['id']:
-                            c.execute("INSERT INTO tweets (parent_id, parent_created, parent_text, reply_id, reply_created, reply_text, similarity) VALUES (?,?,?,?,?,?,?)", (parent['id'], parent['created_at'], parent['full_text'], tweet['id'], tweet['created_at'], text, float(sims[0][0])))
+                            c.execute("INSERT INTO tweets (parent_id, parent_created, parent_text, reply_id, reply_created, reply_text, similarity_with_WHO_advice) VALUES (?,?,?,?,?,?,?)", (parent['id'], parent['created_at'], parent['full_text'], tweet['id'], tweet['created_at'], text, float(sims[0][0])))
                             conn.commit()
                             print(parent['id'], parent['created_at'], parent['full_text'])
                             print(tweet['id'], tweet['created_at'], text, sims[0][0], '\n')
+                            time.sleep(10)
 
         except KeyError as e:
             print(str(e))
@@ -64,7 +65,7 @@ while True:
         auth.set_access_token(akey, asec)
         twitterStream = tweepy.Stream(auth, MyStreamListener(), language='en', tweet_mode='extended')
         #Use track to find keywords and follow to find users
-        twitterStream.filter(track=['antibiotic', 'antibiotics'])
+        twitterStream.filter(track=['virus', 'antibiotic', 'antibiotics'])
     except Exception as e:
         print(str(e))
         time.sleep(4)
