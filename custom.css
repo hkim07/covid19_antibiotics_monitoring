@@ -344,10 +344,10 @@ td:not(.CalendarDay) {
   border-bottom: 1px solid #E1E1E1; }
 th:first-child:not(.CalendarDay),
 td:first-child:not(.CalendarDay) {
-  padding-left: 10; }
+  padding-left: 20; }
 th:last-child:not(.CalendarDay),
 td:last-child:not(.CalendarDay) {
-  padding-right: 10; }
+  padding-right: 20; }
 
 
 

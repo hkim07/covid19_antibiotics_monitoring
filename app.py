@@ -7,7 +7,9 @@ import sqlite3
 import preprocessor as p
 p.set_options(p.OPT.MENTION, p.OPT.EMOJI)
 
-external_stylesheets = ['https://github.com/hkim07/covid19_antibiotics_monitoring/blob/master/custom.css']
+external_stylesheets = ['https://raw.githubusercontent.com/hkim07/covid19_antibiotics_monitoring/master/custom.css']
+#'https://raw.githubusercontent.com/hkim07/covid19_antibiotics_monitoring/master/custom.css']
+#https://codepen.io/chriddyp/pen/bWLwgP.css
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
