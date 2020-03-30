@@ -41,7 +41,7 @@ class MyStreamListener(tweepy.StreamListener):
                 else:
                     text = unidecode(tweet['text'])
 
-                if len(re.findall(r"antibiotic|antibiotics", text))!=0:
+                if len(re.findall("antibiotic|antibiotics", text))!=0:
                     sims = cosine_similarity(who_embs, sbert.encode([text]))
                     if sims[0][0]>threshold:
                         try:
@@ -63,7 +63,7 @@ while True:
         auth = tweepy.OAuthHandler(ckey, csec)
         auth.set_access_token(akey, asec)
         twitterStream = tweepy.Stream(auth, MyStreamListener(), language='en', tweet_mode='extended')
-        #Use track to find keywords and follow to find users
+        #Use track to find keywords
         twitterStream.filter(track=['corona', 'virus', 'covid'])
     except Exception as e:
         print(str(e))
