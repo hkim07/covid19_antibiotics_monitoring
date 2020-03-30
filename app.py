@@ -47,7 +47,7 @@ app.layout = html.Div([
                     }],
                     'layout': {
                         'width': 550,
-                        'height': 300,
+                        'height': 350,
                         'margin': {
                             'l': 10, 'b': 20, 't': 0, 'r': 0
                         },
@@ -61,10 +61,14 @@ app.layout = html.Div([
         style={'width': '49%', 'margin-top': 10, 'display': 'inline-block'}),
 
         html.Div([
-            html.H4("Tweets that need your decision"),
+            html.H4("Do these tweets contain misinformation?"),
+            dcc.Input(id='input-1-state', type='text', value='Tweet ID'),
+            dcc.Input(id='input-2-state', type='text', value='Category (if not 0)'),
+            html.Button(id='submit-button', n_clicks=0, children='Submit'),
+            html.Div(id='output-state'),
             html.Div(id='live-evaluation'),
             dcc.Interval(id='interval-component-second', interval=5*1000, n_intervals=0)
-        ], style={'width':'49%', 'display': 'inline-block'})
+        ], style={'width':'51%', 'display': 'inline-block'})
     ])
 ])
 
@@ -73,7 +77,7 @@ app.layout = html.Div([
 def update_tweet(n):
     conn = sqlite3.connect(r'covid_antibiotics.sqlite')
     c = conn.cursor()
-    sql = '''select * from tweets'''
+    sql = "select * from tweets"
     df = pd.read_sql(sql, conn)
     df.similarity_with_WHO_advice = round(df.similarity_with_WHO_advice, 2)
     df = df.sort_values(by=['reply_created'], ascending=False)
@@ -104,7 +108,7 @@ def update_tweet(n):
 def show_candidates(n):
     conn = sqlite3.connect(r'covid_antibiotics.sqlite')
     c = conn.cursor()
-    sql = '''select * from tweets'''
+    sql = "select * from tweets"
     df = pd.read_sql(sql, conn)
     df.similarity_with_WHO_advice = round(df.similarity_with_WHO_advice, 2)
     df = df.sort_values(by=['similarity_with_WHO_advice'], ascending=False)
@@ -112,13 +116,13 @@ def show_candidates(n):
     df.reply_text = [p.clean(x) for x in df.reply_text]
     df = df[['parent_id', 'parent_text']]
 
-    max_nrow = 3
+    max_nrow = 5
     if df.shape[0] < max_nrow:
         row_limit = df.shape[0]
     else:
         row_limit = max_nrow
 
-    table_width = [100, 500]
+    table_width = [100, 600]
     return html.Table([
         html.Thead(
             html.Tr([html.Th(col) for col in df.columns])
