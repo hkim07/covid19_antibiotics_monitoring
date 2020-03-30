@@ -1,6 +1,7 @@
 # COVID-19 Twitter Misinformation Monitor for Fact Checkers
 
-Video: https://youtu.be/7BPBhW6SLpw
+## Youtube video
+We posted a Youtube video to explain the structure of our app. Please check the video first at https://youtu.be/7BPBhW6SLpw.
 
 
 ## Dependency
