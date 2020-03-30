@@ -1,6 +1,6 @@
 # COVID-19 Twitter Misinformation Monitor for Fact Checkers
 
-[![COVID-19 Twitter Misinformation Monitor](https://github.com/hkim07/covid19_antibiotics_monitoring/blob/master/video_preview.png)](https://www.youtube.com/watch?v=7BPBhW6SLpw)
+Video: https://youtu.be/7BPBhW6SLpw
 
 
 ## Dependency
