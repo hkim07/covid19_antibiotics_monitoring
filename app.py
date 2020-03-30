@@ -22,15 +22,19 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 conn = sqlite3.connect(r'misinformation.sqlite')
 c = conn.cursor()
-sql = "select * from misinfo_categories"
-df = pd.read_sql(sql, conn)
-df_counter = dict(Counter(df.misinfo_cat))
-x = np.arange(1,5); y = []
-for i in x:
-    if i in df_counter:
-        y.append(df_counter[i])
-    else:
-        y.append(0)
+try:
+    sql = "select * from misinfo_categories"
+    df = pd.read_sql(sql, conn)
+    df_counter = dict(Counter(df.misinfo_cat))
+    x = np.arange(1,5); y = []
+    for i in x:
+        if i in df_counter:
+            y.append(df_counter[i])
+        else:
+            y.append(0)
+except:
+    x = np.arange(1,5)
+    y = [0,0,0,0]
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 

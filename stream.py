@@ -1,12 +1,10 @@
-import tweepy
-import re, json, sqlite3
+import res, sqlite3
 from unidecode import unidecode
-import time, datetime
+import time
 from config import ckey, csec, akey, asec
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 sbert = SentenceTransformer('bert-base-nli-mean-tokens')
-
 
 import tweepy
 auth = tweepy.OAuthHandler(ckey, csec)
