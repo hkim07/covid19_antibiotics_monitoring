@@ -27,3 +27,12 @@ if len(re.findall("antibiotic|antibiotics", text))!=0:
 ```
 Run this file with `> python stream.py`. It initiates a sqlite database having seven fields (parent_id, parent_created, parent_text, reply_id, reply_created, reply_text, similarity_with_WHO_advice).
 
+### config.py
+You should create `config.py` in the same folder with `stream.py`. `config.py` have to contain credential keys provided by the official Twitter api. 
+
+### app.py
+Run this file with `>python app.py`. A local development server will be opened. 
+- The upper panel shows recent tweet replies and their parents about COVID-19 and antibiotics. It automatically refreshes every 10 seconds. 
+- The bottom left panel is the category distribution of misinformation. We classified COVID-19 misinformation about antibiotics into four categories, (1) antibiotics work against COVID-19, (2) antibiotics are able to treat viral pneumonia caused by COVID-19, (3) people can be resistant to antibiotics being used to treat bacterial co-infection, and (4) other wrong claims including conspiracy theories. 
+- The bottom right panel shows top 5 parent tweets in order of their replies' similarity. As their replies have similar contexts with the official advice we set, the parent posts are likely to be contain COVID-19 misinformation about antibiotics. Once you identify misinformation in the list, put its ID and category in text boxes and submit them. This information is stored in another sqlite file named "misinformation." Saved results are retrieved to draw the bottom left panel. 
+
