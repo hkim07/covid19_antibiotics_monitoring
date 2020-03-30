@@ -4,8 +4,8 @@
 
 This system was built on the Python 3.7.3 environment. The following libraries need to be installed before running the system. We installed all libraries via pip. 
 
-- Tweepy
-- Dash: https://dash.plotly.com/installation / pip install dash==1.9.1
+- Tweepy 3.8.0
+- Dash 1.9.1: https://dash.plotly.com/installation / pip install dash==1.9.1
 - Sentence_transformers: https://github.com/UKPLab/sentence-transformers ('bert-base-nli-mean-tokens' ~ 400MB)
 - and other useful libraries: pandas, sklearn, unidecode, and tweet preprocessor (https://github.com/s/preprocessor)
 
