@@ -1,5 +1,8 @@
 # COVID-19 Twitter Misinformation Monitor for Fact Checkers
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=7BPBhW6SLpw)
+
+
 ## Dependency
 
 This system was built on the Python 3.7.3 environment. The following libraries need to be installed before running the system. We installed all libraries via pip. 
