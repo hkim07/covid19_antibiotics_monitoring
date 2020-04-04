@@ -15,11 +15,6 @@ p.set_options(p.OPT.MENTION, p.OPT.EMOJI)
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-#identified_misinfo = pd.read_csv("./identified_misinfo_tweets_20200325.csv")
-#identified_misinfo = identified_misinfo[identified_misinfo.misinfo!=0]
-#identified_misinfo_dist = dict(Counter(identified_misinfo.misinfo))
-#identified_misinfo_dist = {x: identified_misinfo_dist[x] for x in np.arange(1,5)}
-
 conn = sqlite3.connect(r'misinformation.sqlite')
 c = conn.cursor()
 try:
